@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.twitter.com/*"
+			],
+			"js": [
+                "content-script.js"
+			],
+			"all_frames": true
+		}
+	],
+	"description": "Auto-Refresh Your Twitter Stream",
+	"name": "Twitter Auto-Refresh",
+	"options_page": "options.html",
+	"version": "1"
+}

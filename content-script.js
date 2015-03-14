@@ -45,7 +45,7 @@ var TwitterRefresh = {
 			a.addEventListener("click", this.toggleAutoRefresh.bind(this));
 
 			// Append elements to the document
-			text.appendChild(document.createTextNode("Auto-Refresh"));
+			text.appendChild(document.createTextNode("Toggle Auto-Refresh"));
 			a.appendChild(icon);
 			a.appendChild(text);
 			li.appendChild(a);
@@ -71,7 +71,15 @@ var TwitterRefresh = {
 		var newTweets = this.newItemsBar.getElementsByClassName("js-new-tweets-bar");
 
 		if (newTweets.length && this.enabled()) {
-			newTweets[0].click();
+
+			window.setTimeout(function () {
+				var clickEvent = new MouseEvent("click", {
+					view:       window,
+					bubbles:    true,
+					cancelable: true
+				});
+				newTweets[0].dispatchEvent(clickEvent);
+			}, 100);
 		}
 	},
 

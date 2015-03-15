@@ -33,7 +33,7 @@ var TwitterRefresh = {
 			var text = document.createElement("span");
 
 			this.refreshIcon = icon;
-			this.setColorOfRefreshIcon();
+			this.updateColorOfRefreshIcon();
 
 			// Setup elements
 			icon.className = "Icon Icon--refresh Icon--large";
@@ -45,7 +45,7 @@ var TwitterRefresh = {
 			a.addEventListener("click", this.toggleAutoRefresh.bind(this));
 
 			// Append elements to the document
-			text.appendChild(document.createTextNode("Toggle Auto-Refresh"));
+			text.appendChild(document.createTextNode("Auto-Refresh"));
 			a.appendChild(icon);
 			a.appendChild(text);
 			li.appendChild(a);
@@ -83,15 +83,6 @@ var TwitterRefresh = {
 		}
 	},
 
-	setColorOfRefreshIcon: function () {
-
-		if (this.enabled()) {
-			this.refreshIcon.style.color = "";
-		} else {
-			this.refreshIcon.style.color = "#CCCCCC";
-		}
-	},
-
 	setNewItemsBar: function (newItemsBar) {
 		this.newItemsBar = newItemsBar;
 
@@ -105,7 +96,16 @@ var TwitterRefresh = {
 	toggleAutoRefresh: function (e) {
 		e.preventDefault();
 		this.enabled(this.enabled() ? false : true);
-		this.setColorOfRefreshIcon();
+		this.updateColorOfRefreshIcon();
+	},
+
+	updateColorOfRefreshIcon: function () {
+
+		if (this.enabled()) {
+			this.refreshIcon.style.color = "";
+		} else {
+			this.refreshIcon.style.color = "#CCCCCC";
+		}
 	}
 };
 

@@ -1,0 +1,22 @@
+{
+  "name": "twitter-auto-refresh",
+  "version": "1.0.0",
+  "description": "Auto-Refresh Your Twitter Stream",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cgravolet/twitter-auto-refresh.git"
+  },
+  "author": "Charles Gravolet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cgravolet/twitter-auto-refresh/issues"
+  },
+  "homepage": "https://github.com/cgravolet/twitter-auto-refresh",
+  "devDependencies": {
+    "gulp": "^3.8.11"
+  }
+}

@@ -5,14 +5,21 @@
  */
 var TwitterRefresh = {
 
+	/**
+	 * Initialization method.
+	 *
+	 * @returns {TwitterRefresh}
+	 */
 	init: function () {
 		var self = this;
 
 		function getNewItemsBar() {
-			var newItemsBar = document.getElementsByClassName("js-new-items-bar-container");
+			var newItemsBar = document.getElementsByClassName(
+					"js-new-items-bar-container");
 
 			if (newItemsBar.length) {
-				document.removeEventListener("DOMSubtreeModified", getNewItemsBar);
+				document.removeEventListener("DOMSubtreeModified",
+						getNewItemsBar);
 				self.setNewItemsBar(newItemsBar[0]);
 			}
 		}
@@ -23,7 +30,11 @@ var TwitterRefresh = {
 		return this;
 	},
 
-	addToggleButton: function() {
+	/**
+	 * Adds a refresh button to the heading of the twitter timeline to give the
+	 * user a way to toggle auto-refresh on and off.
+	 */
+	addToggleButton: function () {
 		var globalActions = document.getElementById("global-actions");
 
 		if (globalActions) {
@@ -53,6 +64,13 @@ var TwitterRefresh = {
 		}
 	},
 
+	/**
+	 * Getter/Setter for the enabled setting which is stored in the browser's
+	 * localStorage.
+	 *
+	 * @param {Boolean} setting
+	 * @returns {Boolean}
+	 */
 	enabled: function (setting) {
 
 		if (setting === true) {
@@ -64,11 +82,18 @@ var TwitterRefresh = {
 			return false;
 		}
 
-		return localStorage.getItem("twitterAutoRefresh") === "false" ? false : true;
+		return localStorage.getItem("twitterAutoRefresh") === "false" ?
+				false : true;
 	},
 
+	/**
+	 * When a change is detected to the timeline, this method should attempt to
+	 * trigger a click event on the 'View new tweets' button that appears when
+	 * the timeline needs to be refreshed.
+	 */
 	refreshTimeline: function () {
-		var newTweets = this.newItemsBar.getElementsByClassName("js-new-tweets-bar");
+		var newTweets = this.newItemsBar.getElementsByClassName(
+				"js-new-tweets-bar");
 
 		if (newTweets.length && this.enabled()) {
 
@@ -83,22 +108,39 @@ var TwitterRefresh = {
 		}
 	},
 
+	/**
+	 * When the new-items bar is detected, this method will save a reference to
+	 * it and attach event listeners that will call the refresh method when a
+	 * change in the timeline is detected.
+	 *
+	 * @param {Object} newItemsBar A reference to the new-items bar element
+	 */
 	setNewItemsBar: function (newItemsBar) {
 		this.newItemsBar = newItemsBar;
 
 		// Add listener for new items bar
-		this.newItemsBar.addEventListener("DOMSubtreeModified", this.refreshTimeline.bind(this));
+		this.newItemsBar.addEventListener("DOMSubtreeModified",
+				this.refreshTimeline.bind(this));
 
 		// Add toggle switch to the twitter header
 		this.addToggleButton();
 	},
 
+	/**
+	 * Enables/Disables the auto-refresh functionality and updates the UI.
+	 *
+	 * @param {Object} e A click event object
+	 */
 	toggleAutoRefresh: function (e) {
 		e.preventDefault();
 		this.enabled(this.enabled() ? false : true);
 		this.updateColorOfRefreshIcon();
 	},
 
+	/**
+	 * Updated the color of the refresh icon based on whether auto-refresh is
+	 * enabled or disabled.
+	 */
 	updateColorOfRefreshIcon: function () {
 
 		if (this.enabled()) {
